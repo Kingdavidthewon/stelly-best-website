@@ -134,9 +134,6 @@ nav { position: fixed; top: 0; width: 100%; z-index: 500; background: rgba(253,2
 .add-to-cart { background: var(--green); color: white; border: none; border-radius: 22px; padding: 9px 18px; font-size: 13px; font-weight: 600; font-family: var(--ff-body); cursor: pointer; transition: all 0.2s; }
 .add-to-cart:hover { background: var(--green-mid); }
 .add-to-cart.done { background: var(--gold); }
-.img-upload-btn { position: absolute; bottom: 12px; right: 12px; background: white; border: none; width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 15px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.12); transition: all 0.2s; opacity: 0; z-index: 2; }
-.product-card:hover .img-upload-btn { opacity: 1; }
-.img-upload-btn:hover { transform: scale(1.15); background: var(--gold-pale); }
 
 /* ========= CHECKOUT ========= */
 .checkout-page { margin-top: 70px; }
@@ -912,6 +909,10 @@ footer { background: #0D1F12; color: rgba(255,255,255,0.55); padding: 4rem 0 2re
 
 <script>
 const PRODUCTS = [
+  // IMAGE GUIDE FOR DEVELOPERS:
+  // When client provides product photos, place them in images/products/ folder
+  // Then update the 'image' field below with the file path, e.g.: 'images/products/spiced-chips.jpg'
+  // Leave image as '' to show the emoji fallback
   { id:1, name:'Spiced Plantain Chips', cat:'chips', tag:'spiced', badge:'bestseller', badgeLabel:'Best Seller', emoji:'🔥', imgClass:'chips-spiced', image:'', price:2500, priceLabel:'₦2,500 / pack', desc:'Bold West African spice blend — smoky, peppery, and utterly addictive. Our signature product.', unit:'Pack (150g)' },
   { id:2, name:'Classic Plantain Chips', cat:'chips', tag:'unspiced', badge:'', badgeLabel:'', emoji:'🍟', imgClass:'chips-plain', image:'', price:2200, priceLabel:'₦2,200 / pack', desc:'Lightly salted and naturally crispy. Pure plantain flavour with no fuss — perfect for all ages.', unit:'Pack (150g)' },
   { id:3, name:'Fresh Ripe Plantain', cat:'fresh', tag:'fresh', badge:'fresh', badgeLabel:'Farm Fresh', emoji:'🍌', imgClass:'ripe', image:'', price:1500, priceLabel:'₦1,500 / bunch', desc:'Sweet, naturally ripened plantain straight from Nigerian farms. Ready to fry, bake, or roast.', unit:'Per Bunch (~6 fingers)' },
@@ -921,28 +922,6 @@ const PRODUCTS = [
 ];
 
 let cart = [];
-
-function triggerImageUpload(productId) {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = 'image/*';
-  input.onchange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      const product = PRODUCTS.find(p => p.id === productId);
-      if (product) {
-        product.image = ev.target.result;
-        renderProductGrid('homeProductGrid', PRODUCTS.slice(0,4));
-        renderProductGrid('shopProductGrid', PRODUCTS);
-        showToast('📸 Image updated for ' + product.name);
-      }
-    };
-    reader.readAsDataURL(file);
-  };
-  input.click();
-}
 
 function renderProductGrid(containerId, items) {
   const g = document.getElementById(containerId);
@@ -956,7 +935,6 @@ function renderProductGrid(containerId, items) {
         }
         ${p.badge ? '<span class="p-badge '+p.badge+'">'+p.badgeLabel+'</span>' : ''}
         <button class="wishlist-btn" onclick="wishlist(event,\'${p.name}\')">🤍</button>
-        <button class="img-upload-btn" onclick="event.stopPropagation();triggerImageUpload(${p.id})" title="Upload product image">📷</button>
       </div>
       <div class="product-body">
         <div class="p-cat">${p.unit}</div>
