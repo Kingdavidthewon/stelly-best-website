@@ -1,0 +1,21 @@
+{
+  "name": "stellybest-backend",
+  "version": "1.0.0",
+  "description": "Backend server for STELLY-BEST VENTURES Int'l Ltd e-commerce website",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js"
+  },
+  "keywords": ["ecommerce", "paystack", "nigeria"],
+  "author": "STELLY-BEST VENTURES",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "axios": "^1.7.7",
+    "nodemailer": "^6.9.15",
+    "uuid": "^10.0.0"
+  }
+}

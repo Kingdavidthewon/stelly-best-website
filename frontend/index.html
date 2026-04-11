@@ -1094,13 +1094,23 @@ function selectPayment(el, method) {
   document.getElementById('paymentInfo').innerHTML = infoMap[method] || '';
 }
 
-function placeOrder() {
+// API base URL — change to your backend URL when deployed
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+  ? 'http://localhost:3000/api'
+  : '/api'; // Same-origin when backend serves frontend
+
+async function placeOrder() {
   const fname = document.getElementById('ck-fname').value.trim();
+  const lname = document.getElementById('ck-lname').value.trim();
   const email = document.getElementById('ck-email').value.trim();
   const phone = document.getElementById('ck-phone').value.trim();
   const address = document.getElementById('ck-address').value.trim();
   const city = document.getElementById('ck-city').value.trim();
+  const state = document.getElementById('ck-state').value.trim();
   const country = document.getElementById('ck-country').value;
+  const zip = document.getElementById('ck-zip').value.trim();
+  const notes = document.getElementById('ck-notes').value.trim();
+
   if (!fname || !email || !phone || !address || !city || !country) {
     showToast('⚠️ Please fill in all required fields');
     return;
@@ -1109,16 +1119,75 @@ function placeOrder() {
     showToast('🛒 Your cart is empty');
     return;
   }
-  const total = cart.reduce((a, b) => a + b.price * b.qty, 0);
-  if (selectedPayment === 'bank') {
-    showToast('✅ Order placed! Please complete your bank transfer to confirm.');
-  } else {
-    showToast('🔒 Redirecting to ' + (selectedPayment === 'paystack' ? 'Paystack' : 'Flutterwave') + ' — ₦' + total.toLocaleString() + '...');
-    setTimeout(() => {
-      showToast('✅ Payment gateway ready — connect your API keys to go live!');
-    }, 2500);
+
+  // Disable button while processing
+  const btn = document.querySelector('.place-order-btn');
+  const originalText = btn.textContent;
+  btn.textContent = '⏳ Processing...';
+  btn.disabled = true;
+
+  try {
+    const response = await fetch(API_URL + '/payments/initialize', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        customer: { firstName: fname, lastName: lname, email, phone, address, city, state, country, zip, notes },
+        items: cart.map(item => ({ id: item.id, name: item.name, price: item.price, qty: item.qty })),
+        paymentMethod: selectedPayment
+      })
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      if (selectedPayment === 'bank') {
+        showToast('✅ Order placed! Check your email for bank transfer details.');
+        cart = [];
+        updateCartBadge();
+        setTimeout(() => showPage('home'), 3000);
+      } else if (result.data.authorization_url) {
+        showToast('🔒 Redirecting to Paystack...');
+        setTimeout(() => {
+          window.location.href = result.data.authorization_url;
+        }, 1000);
+      }
+    } else {
+      showToast('❌ ' + (result.message || 'Something went wrong'));
+    }
+  } catch (err) {
+    console.error('Order error:', err);
+    showToast('❌ Connection error — please try again');
   }
+
+  btn.textContent = originalText;
+  btn.disabled = false;
 }
+
+// Check for payment callback on page load
+(function checkPaymentCallback() {
+  const params = new URLSearchParams(window.location.search);
+  const ref = params.get('ref');
+  const payment = params.get('payment');
+  if (payment === 'success' && ref) {
+    // Verify the payment
+    fetch(API_URL + '/payments/verify/' + ref)
+      .then(r => r.json())
+      .then(result => {
+        if (result.success) {
+          cart = [];
+          updateCartBadge();
+          showToast('✅ Payment confirmed! Order ' + result.data.orderId + ' is being processed.');
+          // Clean URL
+          window.history.replaceState({}, document.title, window.location.pathname);
+        } else {
+          showToast('⚠️ Payment verification pending — we\'ll confirm shortly.');
+        }
+      })
+      .catch(() => {
+        showToast('⚠️ Could not verify payment — contact us if charged.');
+      });
+  }
+})();
 
 function showToast(msg) {
   const t = document.getElementById('toast');
