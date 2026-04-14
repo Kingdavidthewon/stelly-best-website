@@ -119,6 +119,7 @@ nav { position: fixed; top: 0; width: 100%; z-index: 500; background: rgba(253,2
 .product-img-wrap.chips-plain { background: linear-gradient(135deg, #FDF5E4 0%, #F5E8C6 100%); }
 .product-img-wrap.ripe { background: linear-gradient(135deg, #FFF0D4 0%, #FFD98A 100%); }
 .product-img-wrap.unripe { background: linear-gradient(135deg, #EDF5ED 0%, #C5E0C5 100%); }
+.product-img-wrap.oil { background: linear-gradient(135deg, #FDE8D0 0%, #F5C28A 100%); }
 .p-badge { position: absolute; top: 12px; left: 12px; border-radius: 20px; padding: 4px 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.04em; }
 .p-badge.bestseller { background: var(--gold); color: white; }
 .p-badge.new { background: var(--green); color: white; }
@@ -401,7 +402,7 @@ footer { background: #0D1F12; color: rgba(255,255,255,0.55); padding: 4rem 0 2re
         <div class="hero-text">
           <div class="hero-eyebrow"><span>Nigeria's Finest, World-Delivered</span></div>
           <h1>Premium Plantain,<br>Rooted in <em>Nigeria.</em><br>Made for the World.</h1>
-          <p class="hero-desc">From sun-ripened farms in West Africa to your doorstep — our plantain chips, chin chin, garri, and plantain flour are crafted for those who refuse to compromise on flavour.</p>
+          <p class="hero-desc">From sun-ripened farms in West Africa to your doorstep — our plantain chips, palm oil, chin chin, garri, and plantain flour are crafted for those who refuse to compromise on quality.</p>
           <div class="hero-btns">
             <button class="btn btn-gold" onclick="showPage('shop')">🛍️ Shop Now</button>
             <button class="btn btn-outline-white" onclick="showPage('bulk')">📦 Order in Bulk</button>
@@ -417,23 +418,23 @@ footer { background: #0D1F12; color: rgba(255,255,255,0.55); padding: 4rem 0 2re
             <div class="hero-product-emoji">🔥</div>
             <div class="hero-product-info">
               <h4>Plantain Chips</h4>
-              <p>Spiced &amp; unspiced, ripe &amp; unripe</p>
-            </div>
-            <div class="hero-product-price">From ₦2,200</div>
-          </div>
-          <div class="hero-product-card" onclick="showPage('shop')">
-            <div class="hero-product-emoji">🫓</div>
-            <div class="hero-product-info">
-              <h4>Plantain Flour (Amala)</h4>
-              <p>Premium packaged plantain flour</p>
+              <p>Ripe &amp; unripe, spiced &amp; classic</p>
             </div>
             <div class="hero-product-price">From ₦2,000</div>
           </div>
           <div class="hero-product-card" onclick="showPage('shop')">
+            <div class="hero-product-emoji">🫒</div>
+            <div class="hero-product-info">
+              <h4>Natural Palm Oil</h4>
+              <p>100% natural, no preservatives</p>
+            </div>
+            <div class="hero-product-price">From ₦8,000</div>
+          </div>
+          <div class="hero-product-card" onclick="showPage('shop')">
             <div class="hero-product-emoji">🍪</div>
             <div class="hero-product-info">
-              <h4>Chin Chin &amp; More</h4>
-              <p>Crunchy snacks &amp; garri flakes</p>
+              <h4>Chin Chin, Garri &amp; More</h4>
+              <p>Snacks, flour &amp; staples</p>
             </div>
             <div class="hero-product-price">From ₦1,500</div>
           </div>
@@ -585,10 +586,10 @@ footer { background: #0D1F12; color: rgba(255,255,255,0.55); padding: 4rem 0 2re
       <div class="filter-bar">
         <button class="filter-btn active" onclick="filterProds('all',this)">All Products</button>
         <button class="filter-btn" onclick="filterProds('chips',this)">Plantain Chips</button>
+        <button class="filter-btn" onclick="filterProds('oil',this)">Palm Oil</button>
         <button class="filter-btn" onclick="filterProds('flour',this)">Flour &amp; Grains</button>
         <button class="filter-btn" onclick="filterProds('snacks',this)">Snacks</button>
         <button class="filter-btn" onclick="filterProds('spiced',this)">Spiced</button>
-        <button class="filter-btn" onclick="filterProds('unspiced',this)">Unspiced</button>
       </div>
       <div class="product-grid" id="shopProductGrid"></div>
     </div>
@@ -651,7 +652,7 @@ footer { background: #0D1F12; color: rgba(255,255,255,0.55); padding: 4rem 0 2re
             <div class="form-group"><label>Product Interest</label>
               <select>
                 <option value="">Select product...</option>
-                <option>Ripe Plantain Chips (Spiced)</option><option>Ripe Plantain Chips (Unspiced)</option><option>Unripe Plantain Chips (Spiced)</option><option>Unripe Plantain Chips (Unspiced)</option><option>All Chip Varieties</option><option>Plantain Flour (Amala)</option><option>Chin Chin</option><option>Garri (Cassava Flakes)</option><option>All Products</option>
+                <option>Ripe Plantain Chips</option><option>Unripe Plantain Chips</option><option>All Chip Varieties</option><option>Natural Palm Oil</option><option>Plantain Flour (Amala)</option><option>Chin Chin</option><option>Garri (Cassava Flakes)</option><option>All Products</option>
               </select>
             </div>
           </div>
@@ -866,7 +867,7 @@ footer { background: #0D1F12; color: rgba(255,255,255,0.55); padding: 4rem 0 2re
     <div class="footer-grid">
       <div>
         <span class="footer-brand"><img src="images/logo.jpeg" alt="SBV" style="width:30px;height:30px;border-radius:50%;vertical-align:middle;margin-right:8px;object-fit:cover;">Stelly-Best <span>Ventures</span></span>
-        <p class="footer-desc">Premium Nigerian food products — plantain chips, chin chin, garri, and plantain flour. Farm-sourced, quality-certified, and made with pride by STELLY-BEST VENTURES Int'l Ltd.</p>
+        <p class="footer-desc">Premium Nigerian food products — plantain chips, natural palm oil, chin chin, garri, and plantain flour. Farm-sourced, quality-certified, and made with pride by STELLY-BEST VENTURES Int'l Ltd.</p>
         <div class="footer-social">
           <a href="https://instagram.com/Stellybest_1" target="_blank" class="social-btn">📸</a>
           <a href="https://www.facebook.com/Imisiale%20Stella" target="_blank" class="social-btn">📘</a>
@@ -875,9 +876,9 @@ footer { background: #0D1F12; color: rgba(255,255,255,0.55); padding: 4rem 0 2re
       <div class="footer-col">
         <h5>Shop</h5>
         <a onclick="showPage('shop')">Plantain Chips</a>
+        <a onclick="showPage('shop')">Natural Palm Oil</a>
         <a onclick="showPage('shop')">Plantain Flour (Amala)</a>
-        <a onclick="showPage('shop')">Chin Chin</a>
-        <a onclick="showPage('shop')">Garri (Cassava Flakes)</a>
+        <a onclick="showPage('shop')">Chin Chin &amp; Snacks</a>
       </div>
       <div class="footer-col">
         <h5>Company</h5>
@@ -926,17 +927,27 @@ footer { background: #0D1F12; color: rgba(255,255,255,0.55); padding: 4rem 0 2re
 
 <script>
 const PRODUCTS = [
-  // IMAGE GUIDE FOR DEVELOPERS:
-  // When client provides product photos, place them in images/products/ folder
-  // Then update the 'image' field below with the file path, e.g.: 'images/products/spiced-chips.jpg'
-  // Leave image as '' to show the emoji fallback
-  { id:1, name:'Ripe Plantain Chips (Spiced)', cat:'chips', tag:'spiced', badge:'bestseller', badgeLabel:'Best Seller', emoji:'🔥', imgClass:'chips-spiced', image:'', price:2500, priceLabel:'₦2,500 / pack', desc:'Ripe plantain chips with a bold spice blend — smoky, peppery, and utterly addictive. Our signature flavour.', unit:'Pack' },
-  { id:2, name:'Ripe Plantain Chips (Unspiced)', cat:'chips', tag:'unspiced', badge:'', badgeLabel:'', emoji:'🍟', imgClass:'chips-plain', image:'', price:2200, priceLabel:'₦2,200 / pack', desc:'Ripe plantain chips, lightly salted and naturally sweet. Pure plantain flavour with no fuss.', unit:'Pack' },
-  { id:3, name:'Unripe Plantain Chips (Spiced)', cat:'chips', tag:'spiced', badge:'', badgeLabel:'', emoji:'🌶️', imgClass:'chips-spiced', image:'', price:2500, priceLabel:'₦2,500 / pack', desc:'Crunchy unripe plantain chips with a fiery spice kick. A savoury snack for those who love bold flavours.', unit:'Pack' },
-  { id:4, name:'Unripe Plantain Chips (Unspiced)', cat:'chips', tag:'unspiced', badge:'', badgeLabel:'', emoji:'🥬', imgClass:'unripe', image:'', price:2200, priceLabel:'₦2,200 / pack', desc:'Classic unripe plantain chips, lightly salted. Firm, crunchy, and naturally delicious.', unit:'Pack' },
-  { id:5, name:'Plantain Flour (Amala)', cat:'flour', tag:'flour', badge:'new', badgeLabel:'New', emoji:'🫓', imgClass:'chips-plain', image:'', price:2000, priceLabel:'₦2,000 / pack', desc:'Premium packaged plantain flour for making smooth, rich amala. Made from 100% natural plantain.', unit:'Pack' },
-  { id:6, name:'Chin Chin', cat:'snacks', tag:'snacks', badge:'bestseller', badgeLabel:'Popular', emoji:'🍪', imgClass:'chips-spiced', image:'', price:1500, priceLabel:'₦1,500 / pack', desc:'Crunchy, golden chin chin — a beloved Nigerian snack made with premium ingredients. Perfect for any occasion.', unit:'Pack' },
-  { id:7, name:'Garri (Cassava Flakes)', cat:'flour', tag:'flour', badge:'new', badgeLabel:'New', emoji:'🥣', imgClass:'chips-plain', image:'', price:1800, priceLabel:'₦1,800 / pack', desc:'Premium packaged garri (cassava flakes). Ready for soaking, eba, or your favourite preparation.', unit:'Pack' },
+  // ---- PLANTAIN CHIPS (150g packs) ----
+  { id:1, name:'Ripe Plantain Chips (150g)', cat:'chips', tag:'unspiced', badge:'', badgeLabel:'', emoji:'🍟', imgClass:'chips-spiced', image:'images/products/150g_ripe.png', price:2000, priceLabel:'₦2,000', desc:'Sweet ripe plantain chips, lightly salted and naturally crispy. Pure plantain flavour in every bite.', unit:'150g Pack' },
+  { id:2, name:'Ripe Plantain Chips — Spiced (150g)', cat:'chips', tag:'spiced', badge:'bestseller', badgeLabel:'Best Seller', emoji:'🔥', imgClass:'chips-spiced', image:'images/products/150g_ripe.png', price:2000, priceLabel:'₦2,000', desc:'Sweet ripe plantain chips with a bold spice blend — smoky, peppery, and utterly addictive.', unit:'150g Pack' },
+  { id:3, name:'Unripe Plantain Chips (150g)', cat:'chips', tag:'unspiced', badge:'', badgeLabel:'', emoji:'🥬', imgClass:'unripe', image:'images/products/150g_unripe.png', price:2000, priceLabel:'₦2,000', desc:'Crunchy unripe plantain chips, lightly salted. Firm, savoury, and naturally delicious.', unit:'150g Pack' },
+  { id:4, name:'Unripe Plantain Chips — Spiced (150g)', cat:'chips', tag:'spiced', badge:'', badgeLabel:'', emoji:'🌶️', imgClass:'unripe', image:'images/products/150g_unripe.png', price:2000, priceLabel:'₦2,000', desc:'Crunchy unripe plantain chips with a fiery spice kick for those who love bold flavours.', unit:'150g Pack' },
+  // ---- PLANTAIN CHIPS (250g packs) ----
+  { id:5, name:'Ripe Plantain Chips (250g)', cat:'chips', tag:'unspiced', badge:'', badgeLabel:'', emoji:'🍟', imgClass:'chips-spiced', image:'images/products/250g_ripe.png', price:4000, priceLabel:'₦4,000', desc:'Bigger pack of our sweet ripe plantain chips. Lightly salted, naturally crispy, perfect for sharing.', unit:'250g Pack' },
+  { id:6, name:'Ripe Plantain Chips — Spiced (250g)', cat:'chips', tag:'spiced', badge:'bestseller', badgeLabel:'Popular', emoji:'🔥', imgClass:'chips-spiced', image:'images/products/250g_ripe_spiced.png', price:4000, priceLabel:'₦4,000', desc:'250g of our famous spiced ripe plantain chips. Bold West African spices in every crunchy bite.', unit:'250g Pack' },
+  { id:7, name:'Unripe Plantain Chips (250g)', cat:'chips', tag:'unspiced', badge:'', badgeLabel:'', emoji:'🥬', imgClass:'unripe', image:'images/products/250g_unripe_spiced.png', price:4000, priceLabel:'₦4,000', desc:'Bigger pack of our firm, savoury unripe plantain chips. Lightly salted and naturally crunchy.', unit:'250g Pack' },
+  { id:8, name:'Unripe Plantain Chips — Spiced (250g)', cat:'chips', tag:'spiced', badge:'', badgeLabel:'', emoji:'🌶️', imgClass:'unripe', image:'images/products/250g_unripe_spiced.png', price:4000, priceLabel:'₦4,000', desc:'250g of spiced unripe plantain chips. A fiery, crunchy snack for bold flavour lovers.', unit:'250g Pack' },
+  // ---- PLANTAIN CHIPS (500g containers) ----
+  { id:9, name:'Ripe Plantain Chips (500g Container)', cat:'chips', tag:'unspiced', badge:'new', badgeLabel:'Family Size', emoji:'🍟', imgClass:'chips-spiced', image:'', price:6000, priceLabel:'₦6,000', desc:'Large 500g container of sweet ripe plantain chips. Perfect for families, parties, and gifting.', unit:'500g Container' },
+  { id:10, name:'Unripe Plantain Chips (500g Container)', cat:'chips', tag:'unspiced', badge:'new', badgeLabel:'Family Size', emoji:'🥬', imgClass:'unripe', image:'', price:6000, priceLabel:'₦6,000', desc:'Large 500g container of crunchy unripe plantain chips. Great for households and bulk snacking.', unit:'500g Container' },
+  // ---- PALM OIL ----
+  { id:11, name:'Natural Palm Oil (2 Litres)', cat:'oil', tag:'oil', badge:'', badgeLabel:'', emoji:'🫒', imgClass:'ripe', image:'images/products/2_Liters_palm_oil.png', price:8000, priceLabel:'₦8,000', desc:'100% natural palm oil, no preservatives or additives. Perfect for all your cooking needs.', unit:'2 Litres' },
+  { id:12, name:'Natural Palm Oil (5 Litres)', cat:'oil', tag:'oil', badge:'bestseller', badgeLabel:'Best Value', emoji:'🫒', imgClass:'ripe', image:'images/products/5_Liters_palm_oil_.png', price:20000, priceLabel:'₦20,000', desc:'Family-size 5 litre bottle of 100% natural palm oil. No preservatives, suitable for all purposes.', unit:'5 Litres' },
+  // ---- FLOUR & GRAINS ----
+  { id:13, name:'Plantain Flour (Amala)', cat:'flour', tag:'flour', badge:'', badgeLabel:'', emoji:'🫓', imgClass:'chips-plain', image:'', price:2000, priceLabel:'₦2,000', desc:'Premium packaged plantain flour for making smooth, rich amala. Made from 100% natural plantain.', unit:'Pack' },
+  { id:14, name:'Garri (Cassava Flakes)', cat:'flour', tag:'flour', badge:'', badgeLabel:'', emoji:'🥣', imgClass:'chips-plain', image:'', price:1800, priceLabel:'₦1,800', desc:'Premium packaged garri (cassava flakes). Ready for soaking, eba, or your favourite preparation.', unit:'Pack' },
+  // ---- SNACKS ----
+  { id:15, name:'Chin Chin', cat:'snacks', tag:'snacks', badge:'bestseller', badgeLabel:'Popular', emoji:'🍪', imgClass:'chips-spiced', image:'', price:1500, priceLabel:'₦1,500', desc:'Crunchy, golden chin chin — a beloved Nigerian snack made with premium ingredients. Perfect for any occasion.', unit:'Pack' },
 ];
 
 let cart = [];
@@ -1228,8 +1239,8 @@ function submitContact() {
   showToast('📨 Message sent! We will get back to you shortly.');
 }
 
-// Init
-renderProductGrid('homeProductGrid', PRODUCTS.slice(0,4));
+// Init — show a mix of products on homepage (first 6)
+renderProductGrid('homeProductGrid', PRODUCTS.slice(0,6));
 </script>
 </body>
 </html>

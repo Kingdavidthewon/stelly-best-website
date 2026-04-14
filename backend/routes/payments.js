@@ -32,8 +32,11 @@ router.post('/initialize', async (req, res) => {
 
     // Calculate total from items (server-side — never trust frontend prices)
     const PRODUCT_PRICES = {
-      1: 2500, 2: 2200, 3: 2500, 4: 2200,
-      5: 2000, 6: 1500, 7: 1800
+      1: 2000, 2: 2000, 3: 2000, 4: 2000,       // 150g chips
+      5: 4000, 6: 4000, 7: 4000, 8: 4000,         // 250g chips
+      9: 6000, 10: 6000,                            // 500g containers
+      11: 8000, 12: 20000,                           // palm oil
+      13: 2000, 14: 1800, 15: 1500                   // flour, garri, chin chin
     };
 
     let total = 0;
